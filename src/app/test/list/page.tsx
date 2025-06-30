@@ -1,19 +1,10 @@
-"use client";
+import { fetchGithubContentList } from "@/lib/github";
 
-import { ContentList } from "@/constants/github";
-import { useEffect, useState } from "react";
+export const revalidate = 3600;
 
-export default function GithubReadmePage() {
-  const [data, setData] = useState<ContentList[] | null>(null);
+export default async function GithubContentList() {
+  const data = await fetchGithubContentList("shell-lab");
 
-  useEffect(() => {
-    fetch("/api/github/list/shell-lab")
-      .then((res) => res.json())
-      .then((data) => setData(data.data))
-      .catch(console.error);
-  }, []);
-
-  if (!data) return <p>Loading...</p>;
   return (
     <div>
       <h2>Shell Lab 목록</h2>

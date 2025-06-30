@@ -1,19 +1,10 @@
-"use client";
-
 import Content from "@/components/Content";
-import { useEffect, useState } from "react";
+import { fetchGithubFile } from "@/lib/github";
 
-export default function GithubReadmePage() {
-  const [data, setData] = useState<string | null>(null);
+export const revalidate = 3600;
 
-  useEffect(() => {
-    fetch("/api/github/content/shell-lab/main/README.md")
-      .then((res) => res.json())
-      .then((data) => setData(data.data))
-      .catch(console.error);
-  }, []);
-
-  if (!data) return <p>Loading...</p>;
+export default async function GithubReadmePage() {
+  const data = await fetchGithubFile("shell-lab", "main", "README.md");
 
   return (
     <div>
