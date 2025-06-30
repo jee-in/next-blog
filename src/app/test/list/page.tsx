@@ -1,6 +1,6 @@
 import { fetchGithubContentList } from "@/lib/github";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export default async function GithubContentList() {
   const data = await fetchGithubContentList("shell-lab");

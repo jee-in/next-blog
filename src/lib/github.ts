@@ -1,3 +1,4 @@
+import "server-only";
 import { ContentList } from "@/app/types/github";
 import { GITHUB_AUTH_TOKEN, GITHUB_USER } from "@/constants/github";
 

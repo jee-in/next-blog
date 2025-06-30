@@ -1,7 +1,7 @@
 import Content from "@/components/Content";
 import { fetchGithubFile } from "@/lib/github";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export default async function GithubReadmePage() {
   const data = await fetchGithubFile("shell-lab", "main", "README.md");
