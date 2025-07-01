@@ -1,31 +1,32 @@
 import MarkdownContent from "@/components/MarkdownContent";
+import { BASE_REPO } from "@/constants/post";
 import { fetchGithubFile, getPostDate } from "@/lib/github";
 import { extractMarkdownTitle, removeTitle } from "@/lib/markdown";
 
 export const revalidate = 86400;
 
-export default async function GithubReadmePage() {
-  const ContentInfo = {
-    repo: "shell-lab",
-    branch: "main",
-    path: "README.md",
-  };
+interface Props {
+  params: Promise<{
+    topic: string;
+    reference: string;
+    source: string;
+  }>;
+}
 
-  const { data, error } = await fetchGithubFile(
-    ContentInfo.repo,
-    ContentInfo.branch,
-    ContentInfo.path
-  );
+export default async function SourcePage({ params }: Props) {
+  const { topic, reference, source } = await params;
+  const path = `${topic}/references/${reference}/${source}.md`;
+  const { data, error } = await fetchGithubFile(BASE_REPO!, "main", path);
 
   if (error) {
-    return <div>콘텐츠를 불러오는 데 실패했습니다.</div>;
+    return <div>콘텐츠를 불러올 수 없습니다.</div>;
   }
 
   if (!data) {
-    return <div>콘텐츠가 없습니다.</div>;
+    return <div>내용이 없습니다.</div>;
   }
 
-  const postDate = await getPostDate(ContentInfo.repo, ContentInfo.path);
+  const postDate = await getPostDate(BASE_REPO!, path);
 
   const title = extractMarkdownTitle(data) ?? "제목 없음";
   const content = removeTitle(data);
