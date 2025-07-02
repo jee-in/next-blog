@@ -1,5 +1,5 @@
 import MarkdownContent from "@/components/MarkdownContent";
-import { fetchGithubFile, getPostDate } from "@/lib/github";
+import { fetchGithubFile, getPostDate } from "@/lib/github/contents";
 import { extractMarkdownTitle, removeTitle } from "@/lib/markdown";
 
 export const revalidate = 86400;
@@ -30,20 +30,24 @@ export default async function GithubReadmePage() {
   const title = extractMarkdownTitle(data) ?? "제목 없음";
   const content = removeTitle(data);
 
+  if (!content) {
+    return <div>콘텐츠가 없습니다.</div>;
+  }
+
   return (
     <div>
       <div className="content-header">
         <h1>{title}</h1>
         <div>
-          <span>{postDate.registerDate ?? ""}</span> 등록
+          <span>{postDate.createdAt ?? ""}</span> 등록
         </div>
         <div>
-          <span>{postDate.lastUpdate ?? ""}</span> 업데이트
+          <span>{postDate.updatedAt ?? ""}</span> 업데이트
         </div>
       </div>
       <hr />
       <div className="content-container">
-        <MarkdownContent>{content}</MarkdownContent>
+        <MarkdownContent content={content} />
       </div>
     </div>
   );

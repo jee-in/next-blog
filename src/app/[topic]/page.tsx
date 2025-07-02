@@ -1,6 +1,5 @@
-import { BASE_REPO } from "@/constants/post";
-import { fetchGithubContentList } from "@/lib/github";
-import { removeMdExtension } from "@/lib/markdown";
+import { BASE_REPO, milestoneMap } from "@/constants/contents";
+import { fetchGithubIssueListByMilestone } from "@/lib/github/issues";
 import Link from "next/link";
 
 export const revalidate = 86400;
@@ -9,11 +8,11 @@ interface Props {
   params: Promise<{ topic: string }>;
 }
 
-export default async function TopicListPage({ params }: Props) {
+export default async function TopicPage({ params }: Props) {
   const { topic } = await params;
-  const { data, error } = await fetchGithubContentList(
+  const { data, error } = await fetchGithubIssueListByMilestone(
     BASE_REPO!,
-    `${topic}/posts`
+    milestoneMap.get(topic)!
   );
 
   if (error) {
@@ -28,11 +27,12 @@ export default async function TopicListPage({ params }: Props) {
     <>
       <div>
         {data.map((item, index) => {
-          const postTitle = removeMdExtension(decodeURIComponent(item.name));
+          const contentTitle = item.title;
+          const contentIdx = item.number;
 
           return (
             <div key={index}>
-              <Link href={`posts/${postTitle}`}>{postTitle}</Link>
+              <Link href={`${topic}/${contentIdx}`}>{contentTitle}</Link>
             </div>
           );
         })}

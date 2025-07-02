@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JI Blog",
-  description: "JI's Dev Blog",
+  title: "Blog",
+  description: "JI's Blog",
 };
 
 export default function RootLayout({
@@ -28,27 +28,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <header
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "10px",
-            backgroundColor: "black",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white",
-                fontSize: "2rem",
-              }}
-            >
+        <header className="header">
+          <div className="header-inner">
+            <div className="header-logo">
               <Link href="/">
-                <span className="blog-title">DEV BLOG</span>
+                <span className="blog-title">BLOG</span>
               </Link>
             </div>
           </div>

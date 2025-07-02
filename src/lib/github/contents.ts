@@ -1,7 +1,7 @@
 import "server-only";
 import { GITHUB_AUTH_TOKEN, GITHUB_USER } from "@/constants/github";
-import { formatUtcToKoreanDate } from "./date";
-import { PostDate } from "@/app/types/github/post";
+import { formatUtcToKoreanDate } from "../date";
+import { PostDate } from "@/app/types/contents/post";
 import { GitHubCommit, GithubRepoContentList } from "@/app/types/api/github";
 
 export async function fetchGithubFile(
@@ -21,7 +21,6 @@ export async function fetchGithubFile(
           "X-GitHub-Api-Version": "2022-11-28",
         },
         cache: "force-cache",
-        next: { revalidate: 60 },
       }
     );
 
@@ -57,7 +56,6 @@ export async function fetchGithubContentList(
           "X-GitHub-Api-Version": "2022-11-28",
         },
         cache: "force-cache",
-        next: { revalidate: 60 },
       }
     );
 
@@ -104,14 +102,14 @@ export async function getPostDate(
     CommitType.FIRST_COMMIT
   );
 
-  const registerDate = formatUtcToKoreanDate(
+  const createdAt = formatUtcToKoreanDate(
     firstCommit[firstCommit.length - 1].commit.committer.date
   );
-  const lastUpdate = formatUtcToKoreanDate(
+  const updatedAt = formatUtcToKoreanDate(
     updateCommit[0].commit.committer.date
   );
 
-  const postDate = { registerDate, lastUpdate };
+  const postDate = { createdAt, updatedAt };
   commitDateCacheMap.set(key, postDate);
 
   return postDate;
@@ -133,7 +131,6 @@ async function fetchGithubCommit(
         pages: commitType,
       },
       cache: "force-cache",
-      next: { revalidate: 60 },
     }
   );
 

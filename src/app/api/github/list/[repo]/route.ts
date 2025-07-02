@@ -1,4 +1,4 @@
-import { fetchGithubContentList } from "@/lib/github";
+import { fetchGithubContentList } from "@/lib/github/contents";
 import { NextRequest, NextResponse } from "next/server";
 
 interface ContextProps {

@@ -2,7 +2,9 @@ import { BASE_REPO } from "@/constants/contents";
 import { fetchGithubMilestoneList } from "@/lib/github/issues";
 import Link from "next/link";
 
-export default async function Home() {
+export const revalidate = 86400;
+
+export default async function TopicListPage() {
   const { data, error } = await fetchGithubMilestoneList(BASE_REPO!);
 
   if (error) {
@@ -17,11 +19,11 @@ export default async function Home() {
     <>
       <div>
         {data.map((item, index) => {
-          const topicTitle = item.title;
+          const categoryTitle = item.title;
 
           return (
             <div key={index}>
-              <Link href={`${topicTitle}`}>{topicTitle}</Link>
+              <Link href={categoryTitle}>{categoryTitle}</Link>
             </div>
           );
         })}

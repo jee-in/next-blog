@@ -1,4 +1,5 @@
-import { PostDate } from "@/app/types/github/post";
+import { PostDate } from "@/app/types/contents/post";
+import { formatUtcToKoreanDate } from "@/lib/date";
 
 interface ContentHeaderProps {
   title: string;
@@ -10,10 +11,10 @@ export default function ContentHeader({ title, postDate }: ContentHeaderProps) {
     <div className="content-header">
       <h1>{title}</h1>
       <div>
-        <span>{postDate.registerDate ?? ""}</span> 등록
+        <span>{formatUtcToKoreanDate(postDate.createdAt) ?? ""}</span> 등록
       </div>
       <div>
-        <span>{postDate.lastUpdate ?? ""}</span> 업데이트
+        <span>{formatUtcToKoreanDate(postDate.updatedAt) ?? ""}</span> 업데이트
       </div>
     </div>
   );

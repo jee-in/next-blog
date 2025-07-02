@@ -1,6 +1,7 @@
+import ContentHeader from "@/components/ContentHeader";
 import MarkdownContent from "@/components/MarkdownContent";
-import { BASE_REPO } from "@/constants/post";
-import { fetchGithubFile, getPostDate } from "@/lib/github";
+import { BASE_REPO } from "@/constants/contents";
+import { fetchGithubFile, getPostDate } from "@/lib/github/contents";
 import { extractMarkdownTitle, removeTitle } from "@/lib/markdown";
 
 export const revalidate = 86400;
@@ -8,14 +9,14 @@ export const revalidate = 86400;
 interface Props {
   params: Promise<{
     topic: string;
-    reference: string;
-    source: string;
+    post: string;
   }>;
 }
 
-export default async function SourcePage({ params }: Props) {
-  const { topic, reference, source } = await params;
-  const path = `${topic}/references/${reference}/${source}.md`;
+export default async function PostPage({ params }: Props) {
+  const { topic, post } = await params;
+  const path = `${topic}/posts/${post}.md`;
+
   const { data, error } = await fetchGithubFile(BASE_REPO!, "main", path);
 
   if (error) {
@@ -33,18 +34,10 @@ export default async function SourcePage({ params }: Props) {
 
   return (
     <div>
-      <div className="content-header">
-        <h1>{title}</h1>
-        <div>
-          <span>{postDate.registerDate ?? ""}</span> 등록
-        </div>
-        <div>
-          <span>{postDate.lastUpdate ?? ""}</span> 업데이트
-        </div>
-      </div>
+      <ContentHeader title={title} postDate={postDate} />
       <hr />
       <div className="content-container">
-        <MarkdownContent>{content}</MarkdownContent>
+        <MarkdownContent content={content} />
       </div>
     </div>
   );

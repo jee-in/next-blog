@@ -1,4 +1,4 @@
-import { fetchGithubContentList } from "@/lib/github";
+import { fetchGithubContentList } from "@/lib/github/contents";
 
 export const revalidate = 86400;
 

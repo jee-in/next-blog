@@ -1,4 +1,4 @@
-import { fetchGithubFile } from "@/lib/github";
+import { fetchGithubFile } from "@/lib/github/contents";
 
 import { NextRequest, NextResponse } from "next/server";
 
