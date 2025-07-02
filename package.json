@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "npx playwright install",
     "test": "playwright test -c e2e/playwright.config.ts tests --ui"
   },
   "dependencies": {
