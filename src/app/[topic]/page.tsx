@@ -1,4 +1,4 @@
-import { BASE_REPO, topicMap, TopicPath } from "@/constants/contents";
+import { BASE_REPO, TOPIC_MAP, TopicPath } from "@/constants/contents";
 import { fetchGithubIssueListByMilestone } from "@/lib/github/issues";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ interface Props {
 
 export default async function TopicPage({ params }: Props) {
   const { topic } = await params;
-  const topicObj = topicMap.get(topic as TopicPath);
+  const topicObj = TOPIC_MAP.get(topic as TopicPath);
 
   if (!topicObj) {
     return <div>콘텐츠를 불러올 수 없습니다.</div>;

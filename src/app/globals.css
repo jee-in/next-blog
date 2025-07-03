@@ -45,12 +45,12 @@ table td {
 
 .header {
   width: 100%;
-  padding: 1rem 1.5rem;
+  padding: 1rem 0;
   background-color: black;
 }
 
 .header-inner {
-  margin: 0 auto;
+  margin: 0 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -86,10 +86,43 @@ table td {
   background-color: #ffffff;
 }
 
-/* .content-header {
-  padding: 20px;
+.dark body {
+  background-color: #121212;
+  color: #e0e0e0;
 }
 
-.content-container {
-  margin: 10px;
-} */
+.dark .header {
+  background-color: #222;
+}
+
+.dark a {
+  color: #bb86fc;
+  border-color: #bb86fc;
+}
+
+.dark code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.1rem;
+  color: #ff5555;
+}
+
+.dark table thead th {
+  color: #bbb;
+  border-color: #444;
+}
+
+.dark table tbody th {
+  background: #333;
+  border-color: #555;
+}
+
+.dark table td {
+  border-color: #555;
+  color: #ccc;
+}
+
+.dark .content-container blockquote {
+  background-color: #222;
+  border-color: #5555aa;
+  color: #ddd;
+}

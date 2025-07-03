@@ -1,4 +1,4 @@
-import { BASE_REPO } from "@/constants/contents";
+import { BASE_REPO, TOPIC_MAP, TopicPath } from "@/constants/contents";
 import { fetchGithubMilestoneList } from "@/lib/github/issues";
 import Link from "next/link";
 
@@ -17,11 +17,13 @@ export default async function Home() {
     <>
       <div>
         {data.map((item, index) => {
-          const topicTitle = item.title;
+          const topicPath = item.title;
+          const topicTitle =
+            TOPIC_MAP.get(item.title as TopicPath)?.topic ?? "제목 없음";
 
           return (
             <div key={index}>
-              <Link href={`${topicTitle}`}>{topicTitle}</Link>
+              <Link href={`${topicPath}`}>{topicTitle}</Link>
             </div>
           );
         })}

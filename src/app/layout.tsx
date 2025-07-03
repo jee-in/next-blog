@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "highlight.js/styles/atom-one-light.css";
-import Link from "next/link";
+import { cookies } from "next/headers";
+import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,23 +21,21 @@ export const metadata: Metadata = {
   description: "JI's Blog",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const theme = (await cookies()).get("theme")?.value ?? "light";
+
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <header className="header">
-          <div className="header-inner">
-            <div className="header-logo">
-              <Link href="/">
-                <span className="blog-title">BLOG</span>
-              </Link>
-            </div>
-          </div>
-        </header>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${
+          theme === "dark" ? "dark" : ""
+        }`}
+      >
+        <Header />
         <main className="main">
           <section>{children}</section>
         </main>

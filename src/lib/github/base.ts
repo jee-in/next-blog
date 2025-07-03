@@ -9,7 +9,9 @@ export async function fetchGitHubAPI<T>(
         Authorization: `Bearer ${GITHUB_AUTH_TOKEN}`,
         "X-GitHub-Api-Version": "2022-11-28",
       },
-      cache: "force-cache",
+      cache: "no-store",
+
+      // cache: "force-cache",
     });
 
     if (!response.ok) {
