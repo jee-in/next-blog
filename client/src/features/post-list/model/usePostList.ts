@@ -5,7 +5,6 @@ export function usePostList(params: PostListParams) {
   return useQuery({
     queryKey: [
       "postList",
-      params.repoName,
       params.milestone,
       params.labels?.join(","),
       params.states?.join(","),

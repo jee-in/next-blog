@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchGitHubGraphQL } from "@/shared/api/graphql/graphql-base";
-import { Issue } from "@/shared/types/api/github";
+import { GQLIssue } from "@/shared/types/api/github";
 
 const query = `
 query (
@@ -51,18 +51,14 @@ export async function POST(req: NextRequest) {
       repoName,
       milestone,
       labels,
-      states,
+      states = ["OPEN"],
       first = 10,
       orderField = "CREATED_AT",
       orderDirection = "DESC",
     } = await req.json();
 
-    if (!owner || !repoName) {
-      return NextResponse.json({ error: "Missing owner or repoName" }, { status: 400 });
-    }
-
     const { data, error } = await fetchGitHubGraphQL<{
-      repository: { issues: { nodes: Issue[] } };
+      repository: { issues: { nodes: GQLIssue[] } };
     }>(query, {
       owner,
       repoName,

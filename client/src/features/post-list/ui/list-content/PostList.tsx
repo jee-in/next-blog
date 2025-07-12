@@ -19,7 +19,6 @@ export default function PostList({ posts, isLoading, error }: Props) {
   if (!posts || posts.length === 0) {
     return <p className="post-list">게시글이 없습니다.</p>;
   }
-  console.log(posts[0]);
 
   return (
     <ul className="post-list">

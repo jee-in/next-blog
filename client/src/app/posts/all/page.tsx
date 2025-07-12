@@ -12,12 +12,11 @@ export default function PostListPage() {
   const [selectedLabels, setSelectedLabels] = useState<Set<string>>(new Set());
 
   const { data, isLoading, error } = usePostList({
-    owner: "jee-in",
-    repoName: "docs",
     labels:
-      selectedLabels.size > 0 ? Array.from(selectedLabels) : allLabels?.map((label) => label.name),
+      selectedLabels.size > 0
+        ? Array.from(selectedLabels).sort()
+        : allLabels?.map((label) => label.name).sort(),
     milestone: undefined,
-    states: ["OPEN"],
     first: 10,
   });
 

@@ -1,8 +1,8 @@
 import { GQLIssue, Label } from "@/shared/types/api/github";
 
 export interface PostListParams {
-  owner: string;
-  repoName: string;
+  owner?: string;
+  repoName?: string;
   milestone?: string;
   labels?: string[];
   states?: ("OPEN" | "CLOSED")[];
