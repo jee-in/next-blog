@@ -155,7 +155,7 @@ li {
 .post-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0.4rem;
   padding: 0.4rem;
   margin: 1rem 0;
   list-style: none;

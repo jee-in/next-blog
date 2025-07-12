@@ -28,7 +28,7 @@ export default function PostList({ posts, isLoading, error }: Props) {
         <li key={post.id} className="post-item">
           <a href={`/posts/${post.number}`} className="post-link">
             <h2 className="post-title">{post.title}</h2>
-            <p className="post-body">{post.body?.slice(0, 100)}...</p>
+            <p className="post-body">{post.body}...</p>
             <div className="post-bottom-box">
               <div className="post-label-box">
                 {post.labels.nodes?.map((label) => (
