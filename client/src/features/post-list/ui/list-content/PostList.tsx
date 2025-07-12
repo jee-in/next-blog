@@ -1,3 +1,4 @@
+import LoadingSpinner from "@/shared/components/spinner/LoadingSpinner";
 import { formatUtcToKoreanDate } from "@/shared/lib/date";
 import { GQLIssue } from "@/shared/types/api/github";
 
@@ -8,12 +9,7 @@ interface Props {
 }
 
 export default function PostList({ posts, isLoading, error }: Props) {
-  if (isLoading)
-    return (
-      <div className="flex mt-40 justify-center">
-        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-      </div>
-    );
+  if (isLoading) return <LoadingSpinner />;
   if (error) return <p>에러가 발생했습니다.</p>;
 
   if (!posts) return;
