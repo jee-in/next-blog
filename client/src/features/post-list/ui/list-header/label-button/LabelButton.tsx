@@ -34,7 +34,7 @@ export default function LabelButton({
   size = "md",
 }: LabelButtonProps) {
   return (
-    <div
+    <button
       key={id}
       onClick={() => onToggle(label)}
       className={`${labelButton}
@@ -42,6 +42,6 @@ export default function LabelButton({
         ${checked ? colorMap[color] : colorMap["gray"]}`}
     >
       {label}
-    </div>
+    </button>
   );
 }
