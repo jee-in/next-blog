@@ -13,5 +13,6 @@ export function usePostList(params: PostListParams) {
     ],
     queryFn: () => requestGithubGraphQLIssueList(params),
     staleTime: 30 * 60 * 60 * 1000,
+    enabled: Array.isArray(params.labels),
   });
 }

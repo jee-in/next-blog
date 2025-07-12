@@ -16,7 +16,9 @@ export default function PostList({ posts, isLoading, error }: Props) {
     );
   if (error) return <p>에러가 발생했습니다.</p>;
 
-  if (!posts || posts.length === 0) {
+  if (!posts) return;
+
+  if (posts.length === 0) {
     return <p className="post-list">게시글이 없습니다.</p>;
   }
 
