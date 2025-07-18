@@ -2,20 +2,24 @@
 
 import { useLabelList } from "@/features/post-list/model/useLabelList";
 import { usePostList } from "@/features/post-list/model/usePostList";
-import PostList from "@/features/post-list/ui/list-content/PostList";
+import PostList from "@/features/post-list/ui/list-content/post-list/PostList";
 import Postfilter from "@/features/post-list/ui/list-header/PostFilter";
 import { Suspense, useState } from "react";
 
 export default function PostListPage() {
-  const { data: allLabels } = useLabelList({});
+  const { data: labelListData, isLoading: isLabelLoading, error: labelError } = useLabelList({});
 
   const [selectedLabels, setSelectedLabels] = useState<Set<string>>(new Set());
 
-  const { data, isLoading, error } = usePostList({
+  const {
+    data: postListData,
+    isLoading: isPostLoading,
+    error: postError,
+  } = usePostList({
     labels:
       selectedLabels.size > 0
         ? Array.from(selectedLabels).sort()
-        : allLabels?.map((label) => label.name).sort(),
+        : labelListData?.map((label) => label.name).sort(),
     milestone: undefined,
     first: 10,
   });
@@ -24,12 +28,14 @@ export default function PostListPage() {
     <div className="content">
       <Suspense fallback={<div>로딩 중</div>}>
         <Postfilter
-          allLabels={allLabels}
           selectedLabels={selectedLabels}
           setSelectedLabels={setSelectedLabels}
+          data={labelListData}
+          isLoading={isLabelLoading || isPostLoading}
+          error={labelError}
         />
       </Suspense>
-      <PostList posts={data} isLoading={isLoading} error={error} />
+      <PostList data={postListData} isLoading={isLabelLoading || isPostLoading} error={postError} />
     </div>
   );
 }

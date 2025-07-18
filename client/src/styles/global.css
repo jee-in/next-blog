@@ -264,6 +264,60 @@ li {
   pointer-events: auto;
 }
 
+.skeleton {
+  background-color: #e2e2e2;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150px;
+  height: 100%;
+  width: 150px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -150px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.skeleton-title {
+  height: 1.5rem;
+  width: 60%;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+}
+
+.skeleton-body {
+  height: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.skeleton-label {
+  height: 1.8rem;
+  width: 5rem;
+  margin-right: 0.4rem;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.skeleton-date {
+  height: 1rem;
+  width: 5rem;
+  border-radius: 4px;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

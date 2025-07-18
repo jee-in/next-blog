@@ -22,7 +22,7 @@ const sizeMap = {
   lg: "text-lg px-5 py-2.5",
 };
 
-const labelButton =
+const labelButtonStyle =
   "inline-block rounded-full border cursor-pointer select-none transition-colors font-medium m-1";
 
 export default function LabelButton({
@@ -37,7 +37,7 @@ export default function LabelButton({
     <button
       key={id}
       onClick={() => onToggle(label)}
-      className={`${labelButton}
+      className={`${labelButtonStyle}
         ${sizeMap[size]}
         ${checked ? colorMap[color] : colorMap["gray"]}`}
     >

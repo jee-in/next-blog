@@ -2,17 +2,22 @@ import LabelButton from "@/features/post-list/ui/list-header/label-button/LabelB
 import { Label } from "@/shared/types/api/github";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import LabelSkeleton from "./label-skeleton/LabelSkeleton";
 
 interface PostfilterProps {
-  allLabels: Label[] | undefined;
   selectedLabels: Set<string>;
   setSelectedLabels: (labels: Set<string>) => void;
+  data: Label[] | undefined;
+  isLoading: boolean;
+  error: unknown;
 }
 
 export default function Postfilter({
-  allLabels,
   selectedLabels,
   setSelectedLabels,
+  data,
+  isLoading,
+  error,
 }: PostfilterProps) {
   const searchParams = useSearchParams();
   const [checkedLabels, setCheckedLabels] = useState<Set<string>>(selectedLabels);
@@ -25,12 +30,6 @@ export default function Postfilter({
     setCheckedLabels(new Set(selectedLabels));
   }, [selectedLabels]);
 
-  const updateLabels = (labels: Set<string>) => {
-    const newParams = new URLSearchParams();
-    labels.forEach((label) => newParams.append("labels", label));
-    history.replaceState(null, "", `?${newParams.toString()}`);
-  };
-
   const handleLabelClick = (labelName: string) => {
     const nextLabels = new Set(checkedLabels);
     if (nextLabels.has(labelName)) {
@@ -39,19 +38,28 @@ export default function Postfilter({
       nextLabels.add(labelName);
     }
     setCheckedLabels(nextLabels);
-    updateLabels(nextLabels);
+
+    const newParams = new URLSearchParams();
+    nextLabels.forEach((label) => newParams.append("labels", label));
+    history.replaceState(null, "", `?${newParams.toString()}`);
   };
 
   return (
     <div className="h-10">
-      {allLabels?.map((label) => (
-        <LabelButton
-          key={label.id}
-          label={label.name}
-          checked={checkedLabels.has(label.name)}
-          onToggle={() => handleLabelClick(label.name)}
-        />
-      ))}
+      {isLoading ? (
+        new Array(3).fill(1).map((_, index) => <LabelSkeleton key={index} />)
+      ) : error ? (
+        <p className="text-red-500">라벨을 불러올 수 없습니다.</p>
+      ) : (
+        data?.map((label) => (
+          <LabelButton
+            key={label.id}
+            label={label.name}
+            checked={checkedLabels.has(label.name)}
+            onToggle={() => handleLabelClick(label.name)}
+          />
+        ))
+      )}
     </div>
   );
 }
