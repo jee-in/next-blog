@@ -7,7 +7,7 @@ const GITHUB_GRAPHQL_API = "https://api.github.com/graphql";
 
 export async function fetchGitHubGraphQL<T>(
   query: string,
-  variables?: Record<string, string | number>,
+  variables?: Record<string, string | number | null | string[]>,
   headerProperties?: Record<string, string>,
   fetchOptions?: NextFetchRequestConfig
 ): Promise<{ data: T | null; error: string | null }> {

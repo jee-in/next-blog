@@ -1,4 +1,7 @@
-import { PostListParams, requestGithubGraphQLIssueList } from "@/shared/api/graphql/graphql-issue";
+import {
+  PostListParams,
+  requestGithubGraphQLIssueList,
+} from "@/shared/api/graphql/handler/graphql-issue";
 import { useQuery } from "@tanstack/react-query";
 
 export function usePostList(params: PostListParams) {

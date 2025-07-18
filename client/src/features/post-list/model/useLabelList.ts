@@ -1,4 +1,7 @@
-import { LabelListParams, requestGithubGraphQLLabelList } from "@/shared/api/graphql/graphql-issue";
+import {
+  LabelListParams,
+  requestGithubGraphQLLabelList,
+} from "@/shared/api/graphql/handler/graphql-issue";
 import { useQuery } from "@tanstack/react-query";
 
 export function useLabelList(params: LabelListParams) {
