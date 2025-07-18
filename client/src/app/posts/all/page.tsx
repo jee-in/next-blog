@@ -31,7 +31,7 @@ export default function PostListPage() {
           selectedLabels={selectedLabels}
           setSelectedLabels={setSelectedLabels}
           data={labelListData}
-          isLoading={isLabelLoading || isPostLoading}
+          isLoading={isLabelLoading}
           error={labelError}
         />
       </Suspense>
