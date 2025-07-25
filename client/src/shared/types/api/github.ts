@@ -292,6 +292,12 @@ export interface Issue {
   author_association: string;
 }
 
+export interface Comment {
+  id: string;
+  body: string;
+  createdAt: string;
+}
+
 export interface GQLIssue {
   id: number;
   node_id: string;
@@ -312,7 +318,7 @@ export interface GQLIssue {
   milestone: Milestone | null;
   locked: boolean;
   active_lock_reason: string | null;
-  comments: number;
+  comments: { nodes: Comment[] };
   pull_request?: PullRequest;
   closed_at: string | null;
   createdAt: string;

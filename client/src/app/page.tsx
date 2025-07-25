@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+export const revalidate = 21600;
+
 export default function Home() {
   return (
     <>

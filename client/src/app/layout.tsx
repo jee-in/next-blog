@@ -2,18 +2,13 @@ import Header from "@/widgets/Header";
 import "../styles/global.css";
 import "highlight.js/styles/atom-one-light.css";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans } from "next/font/google";
 import GoogleAnalytics from "@/shared/lib/GoogleAnalytics";
 
 const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ?? null;
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const notoSans = Noto_Sans({
+  variable: "--font-noto-sans",
   subsets: ["latin"],
 });
 
@@ -30,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>{gaId && <GoogleAnalytics gaId={gaId} />}</head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${notoSans.variable} ${notoSans.variable} antialiased`}>
         <Header />
         <main className="main">{children}</main>
       </body>

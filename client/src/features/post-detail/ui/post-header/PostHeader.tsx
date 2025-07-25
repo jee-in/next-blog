@@ -4,9 +4,10 @@ import { PostDate } from "@/shared/types/blog/post";
 interface PostHeaderProps {
   title: string;
   postDate: PostDate;
+  summary: string | null;
 }
 
-export default function PostHeader({ title, postDate }: PostHeaderProps) {
+export default function PostHeader({ title, postDate, summary }: PostHeaderProps) {
   const isSame = isSameDate(postDate.createdAt, postDate.updatedAt);
   const updateMsg = formatUtcToKoreanDate(postDate.updatedAt)
     ? `${formatUtcToKoreanDate(postDate.updatedAt)} 업데이트`
@@ -24,6 +25,7 @@ export default function PostHeader({ title, postDate }: PostHeaderProps) {
           </i>
         </div>
       </div>
+      <div className="post-header-summary">{summary}</div>
     </div>
   );
 }

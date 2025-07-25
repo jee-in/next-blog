@@ -3,15 +3,22 @@ import { GQLIssue } from "@/shared/types/api/github";
 
 const query = `
 query ($owner: String!, $repoName: String!, $issueNumber: Int!) {
-  repository(owner:$owner, name:$repoName) {
-    issue(number:$issueNumber) {
-        id
-        number
-        title
-        body
-        url
-        createdAt
-        updatedAt
+  repository(owner: $owner, name: $repoName) {
+    issue(number: $issueNumber) {
+      id
+      number
+      title
+      body
+      url
+      createdAt
+      updatedAt
+      comments(first: 1) {
+        nodes {
+          id
+          body
+          createdAt
+        }
+      }
     }
   }
 }

@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: issue.title,
-    description: issue.body?.slice(0, 160) || "게시글 상세 내용",
+    description: issue.comments?.nodes?.[0]?.body || "게시글 상세 내용",
   };
 }
 
@@ -51,6 +51,7 @@ export default async function PostPage({ params }: Props) {
           createdAt: issue.createdAt,
           updatedAt: issue.updatedAt,
         }}
+        summary={issue?.comments?.nodes?.[0].body || null}
       />
       <hr />
       <MarkdownContent content={issue.body} />

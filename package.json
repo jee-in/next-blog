@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cd client && next dev",
-    "build": "cd client && next build",
+    "build": "NEXT_CACHE_DIR=./client/.next/cache cd client && next build",
     "start": "cd client && next start",
     "lint": "next lint client",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",

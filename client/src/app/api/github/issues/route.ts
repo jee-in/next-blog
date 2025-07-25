@@ -27,8 +27,6 @@ query (
         id
         number
         title
-        body
-        url
         createdAt
         updatedAt
         labels(first: 10) {
@@ -36,6 +34,13 @@ query (
             id
             name
             color
+          }
+        }
+        comments(first: 1) {
+          nodes {
+            id
+            body
+            createdAt
           }
         }
       }
@@ -75,10 +80,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({
-      issues: (data?.repository.issues.nodes ?? []).map((issue) => ({
-        ...issue,
-        body: issue?.body?.slice(0, 100),
-      })),
+      issues: data?.repository.issues.nodes ?? [],
     });
   } catch (e) {
     return NextResponse.json(
