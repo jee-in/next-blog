@@ -26,7 +26,7 @@ export default function PostListPage() {
 
   return (
     <div className="content">
-      <Suspense fallback={<div>로딩 중</div>}>
+      <Suspense fallback={<div></div>}>
         <Postfilter
           selectedLabels={selectedLabels}
           setSelectedLabels={setSelectedLabels}

@@ -25,6 +25,8 @@ export default function PostList({ data, isLoading, error }: Props) {
                 <h2 className="post-title">{post.title}</h2>
                 <p className="post-body">{post.comments?.nodes?.[0]?.body || null}</p>
                 <div className="post-bottom-box">
+                  <p className="post-date">{formatUtcToKoreanDate(post.createdAt)}</p>
+
                   <div className="post-label-box">
                     {post.labels.nodes?.map((label) => (
                       <span
@@ -39,7 +41,6 @@ export default function PostList({ data, isLoading, error }: Props) {
                       </span>
                     ))}
                   </div>
-                  <p className="post-date">{formatUtcToKoreanDate(post.createdAt)}</p>
                 </div>
               </a>
             </li>
