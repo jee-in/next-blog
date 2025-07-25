@@ -45,7 +45,7 @@ export const GrayUnchecked: Story = {
     checked: false,
     onToggle: () => {},
     color: "gray",
-    size: "sm",
+    size: "md",
   },
 };
 

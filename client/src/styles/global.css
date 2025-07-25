@@ -2,6 +2,7 @@
 
 body {
   margin: 0;
+  width: 100vw;
   min-height: 100vh;
   box-sizing: border-box;
 }
@@ -248,7 +249,7 @@ li {
   border-radius: 4px;
   position: absolute;
   bottom: 140%;
-  left: 50%;
+  left: -400%;
   transform: translateX(-50%);
   white-space: nowrap;
   opacity: 0;

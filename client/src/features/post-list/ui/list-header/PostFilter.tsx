@@ -2,7 +2,7 @@ import LabelButton from "@/features/post-list/ui/list-header/label-button/LabelB
 import { Label } from "@/shared/types/api/github";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import LabelSkeleton from "./label-skeleton/LabelSkeleton";
+import LabelButtonSkeleton from "./label-button-skeleton/LabelButtonSkeleton";
 
 interface PostfilterProps {
   selectedLabels: Set<string>;
@@ -45,9 +45,9 @@ export default function Postfilter({
   };
 
   return (
-    <div className="h-10">
+    <div className="flex flex-wrap">
       {isLoading ? (
-        new Array(3).fill(1).map((_, index) => <LabelSkeleton key={index} />)
+        new Array(3).fill(1).map((_, index) => <LabelButtonSkeleton key={index} />)
       ) : error ? (
         <p className="text-red-500">라벨을 불러올 수 없습니다.</p>
       ) : (
