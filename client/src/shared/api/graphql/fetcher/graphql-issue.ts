@@ -66,14 +66,19 @@ export async function fetchGithubGraphQLIssueList(params: PostListParams): Promi
 
   const { data, error } = await fetchGitHubGraphQL<{
     repository: { issues: { nodes: GQLIssue[] } };
-  }>(query, {
-    milestone,
-    labels,
-    states,
-    first,
-    orderField,
-    orderDirection,
-  });
+  }>(
+    query,
+    {
+      milestone,
+      labels,
+      states,
+      first,
+      orderField,
+      orderDirection,
+    },
+    {},
+    { next: { revalidate: 21600 } }
+  );
 
   if (error) {
     throw new Error(error);

@@ -4,8 +4,6 @@ import PostHeader from "@/features/post-detail/ui/post-header/PostHeader";
 import { fetchGithubGraphQLIssueList } from "@/shared/api/graphql/fetcher/graphql-issue";
 import { Metadata } from "next";
 
-export const revalidate = 21600;
-
 export async function generateStaticParams() {
   const issues = await fetchGithubGraphQLIssueList({ first: 50 });
 

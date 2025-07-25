@@ -27,7 +27,7 @@ query ($owner: String!, $repoName: String!, $issueNumber: Int!) {
 export async function fetchPostDetail(
   issueNumber: number,
   headerProperties?: Record<string, string>,
-  fetchOptions?: NextFetchRequestConfig
+  fetchOptions?: RequestInit
 ): Promise<{ issue: GQLIssue | null; error: string | null }> {
   const { data, error } = await fetchGitHubGraphQL<{
     repository: { issue: GQLIssue };

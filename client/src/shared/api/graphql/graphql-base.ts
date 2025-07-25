@@ -9,7 +9,7 @@ export async function fetchGitHubGraphQL<T>(
   query: string,
   variables?: Record<string, string | number | null | string[]>,
   headerProperties?: Record<string, string>,
-  fetchOptions?: NextFetchRequestConfig
+  fetchOptions?: RequestInit
 ): Promise<{ data: T | null; error: string | null }> {
   try {
     const response = await fetch(GITHUB_GRAPHQL_API, {
